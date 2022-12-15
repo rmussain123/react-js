@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import './expenses.css';
 import NewExpenseItem from './components/Expenses/NewExpenseItems';
+import NewExpense from './components/NewExpense/NewExpense';
 const expenses = [
   {
     id: 'e1',
@@ -25,9 +26,15 @@ const expenses = [
 ];
 
 function App() {
+  const addExpenseHandler = expense => {
+    console.log('In App.js');
+    console.log(expense);
+  };
+
   return (
     <div className="App">
      <h2>Let's Gte started</h2>
+     <NewExpense onAddExpense={addExpenseHandler} />
     <NewExpenseItem expenses={expenses} className='expenses'/>
     </div>
   );
