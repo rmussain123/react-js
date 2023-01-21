@@ -1,9 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-import './expenses.css';
-import NewExpenseItem from './components/Expenses/NewExpenseItems';
+import React, { useState } from 'react';
+
 import NewExpense from './components/NewExpense/NewExpense';
-const expenses = [
+import Expenses from './components/Expenses/Expenses';
+
+const DUMMY_EXPENSES = [
   {
     id: 'e1',
     title: 'Toilet Paper',
@@ -25,19 +25,28 @@ const expenses = [
   },
 ];
 
-function App() {
-  const addExpenseHandler = expense => {
-    console.log('In App.js');
-    console.log(expense);
+const App = () => {
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevExpenses) => {
+      return [expense, ...prevExpenses];
+    });
   };
 
+  // return React.createElement(
+  //   'div',
+  //   {},
+  //   React.createElement('h2', {}, "Let's get started!"),
+  //   React.createElement(Expenses, { items: expenses })
+  // );
+
   return (
-    <div className="App">
-     <h2>Let's Gte started</h2>
-     <NewExpense onAddExpense={addExpenseHandler} />
-    <NewExpenseItem expenses={expenses} className='expenses'/>
+    <div>
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses items={expenses} />
     </div>
   );
-}
+};
 
 export default App;
